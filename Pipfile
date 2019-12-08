@@ -17,6 +17,7 @@ pytz = "*"
 numpy = "*"
 psycopg2-binary = "*"
 flask-restplus = "*"
+yapf = "*"
 
 [requires]
 python_version = "3.7"
