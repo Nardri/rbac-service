@@ -3,9 +3,8 @@
 from os import getenv
 from app import create_app
 
-
 # get the environment name
-env = getenv('FLASK_ENV', default='production')
+env = getenv('FLASK_ENV', 'production')
 app = create_app(env)
 
 if __name__ == '__main__':
