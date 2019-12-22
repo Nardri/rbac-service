@@ -3,13 +3,22 @@
 from .database import database as db
 
 
-class ModelOperation(object):
-    """Model operation"""
+class ModelOperationsMixin:
+    """Mixin Model operation"""
+
+    __abstract__ = True
 
     def save(self):
         """Save to the database."""
 
         db.session.add(self)
+        db.session.commit()
+        return self
+
+    def delete(self):
+        """Delete from database."""
+
+        db.session.delete(self)
         db.session.commit()
         return self
 
@@ -35,8 +44,7 @@ class ModelOperation(object):
             Object :
         """
         if not kwargs:
-            instance = cls.query.filter_by(deleted=False).order_by(
-                cls.created_at)
+            instance = cls.query.filter_by().order_by(cls.created_at)
         else:
             instance = cls.query.filter_by(**kwargs)
         return instance
