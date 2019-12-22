@@ -18,8 +18,12 @@ class Config(object):
 
     TESTING = False
     DEBUG = False
+    SERVER_NAME = getenv('SERVER_NAME', '127.0.0.1:5000')
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = getenv('DATABASE_URI', default=defaultDB)
+    SQLALCHEMY_DATABASE_URI = getenv('DATABASE_URI', defaultDB)
+
+    RESTPLUS_VALIDATE = True
 
     # Wrap the path in an object for enhanced functionality
     private_key = Path('./jwt_key')

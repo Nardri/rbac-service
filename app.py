@@ -8,10 +8,15 @@ from flask_restplus import Api
 from config import app_config
 from src import api_blueprint
 from src.models.configs.database import (database, migrate)
+from src.utils.application_error import ApplicationError
+from src.views.role import ROLE_NS
 
 # initialize RestPlus with the API blueprint
-api = Api(api_blueprint, doc='/doc/',
+api = Api(api_blueprint,
+          doc='/doc/',
           description="Documentation for the RBAC service")
+
+api.add_namespace(ROLE_NS)
 
 
 def register_blueprints(application):
@@ -42,7 +47,7 @@ def create_app(env):
 
     # import models
     import src.models
-    
+
     # Import views
     import src.views
 
@@ -55,11 +60,16 @@ def create_app(env):
     @app.route('/', methods=['GET'])
     def health():
         """Index Route"""
-        return jsonify(
-            data={
-                "status": 'success',
-                "message": 'Role Based Access Control Service.'
-            },
-        )
+        return jsonify(data={
+            "status": 'success',
+            "message": 'Role Based Access Control Service.'
+        }, )
 
     return app
+
+
+@api_blueprint.errorhandler(ApplicationError)
+def handle_exceptions(err):
+    """Custom Application Error handler."""
+
+    return err.to_dict()

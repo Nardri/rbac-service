@@ -18,6 +18,11 @@ numpy = "*"
 psycopg2-binary = "*"
 flask-restplus = "*"
 yapf = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-flask = "*"
+factory-boy = "*"
+faker = "*"
 
 [requires]
 python_version = "3.7"

@@ -6,9 +6,9 @@ Examples:
     date_time.time()
 """
 
-import pytz
 from os import getenv
 from datetime import datetime, timedelta
+import pytz
 from pytz import timezone
 
 fmt = '%Y-%m-%d %H:%M:%S %Z%z'
@@ -18,7 +18,6 @@ tz = getenv('TIMEZONE', 'Africa/Lagos')
 
 class DateTime(object):
     """Generates datetime according to the timezone."""
-
     def __init__(self, time_zone=None):
         self.UTC = pytz.utc
         self.time_zone = timezone(time_zone) if time_zone else self.UTC
@@ -37,8 +36,13 @@ class DateTime(object):
             Datetime: Formatted output
         """
         year, month, day, hour, minute, second = arg
-        utc_dt = datetime(
-            year, month, day, hour, minute, second, tzinfo=self.UTC)
+        utc_dt = datetime(year,
+                          month,
+                          day,
+                          hour,
+                          minute,
+                          second,
+                          tzinfo=self.UTC)
         loc_dt = utc_dt.astimezone(self.time_zone)
         return self._output(loc_dt, format_)
 
@@ -110,8 +114,9 @@ class DateTime(object):
             self._output(self._now(), format_),
             'MANIPULATE':
             self._output(
-                self._date_manipulation(
-                    self._now, type_=manipulation_type, **kwargs), format_)
+                self._date_manipulation(self._now,
+                                        type_=manipulation_type,
+                                        **kwargs), format_)
         }
 
         return mapper['MANIPULATE'] if manipulate else mapper['NOW']

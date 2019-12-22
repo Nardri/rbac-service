@@ -25,12 +25,12 @@ class Permission(BaseModel):
 
     type = db.Column(db.Enum(PermissionType), default=PermissionType.NONE)
     active = db.Column(db.Boolean, default=False)
-    service_id = db.Column(db.String(36), db.ForeignKey('services.id',
-                                                        ondelete="CASCADE"))
-    role_id = db.Column(db.String(36), db.ForeignKey('roles.id',
-                                                     ondelete="CASCADE"))
-    service = db.relationship("Service", back_populates="permissions")
-    role = db.relationship("Role", back_populates="permissions")
+    service_id = db.Column(db.String(36),
+                           db.ForeignKey('services.id', ondelete="CASCADE"),
+                           nullable=False)
+    role_id = db.Column(db.String(36),
+                        db.ForeignKey('roles.id', ondelete="CASCADE"),
+                        nullable=False)
 
     def __repr__(self):
-        return '<Service {}>'.format(self.name)
+        return '<Permission {} for {}>'.format(self.type, self.service.name)
