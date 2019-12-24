@@ -11,6 +11,7 @@ class RoleFactory(BaseFactory):
     """Role Factory"""
 
     name = factory.Sequence(lambda n: f'role{n}')
+    is_default = factory.Iterator([False, True])
 
     class Meta:
         """Role factory meta class"""

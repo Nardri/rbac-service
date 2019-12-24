@@ -2,13 +2,9 @@
 
 # system imports
 from os import getenv, environ
-import ctypes
 
 # third party imports
 import pytest
-from sqlalchemy import event
-from sqlalchemy.event.registry import _key_to_collection as collection
-
 # local import
 from app import create_app
 from src.models.configs.database import database as db
@@ -55,13 +51,13 @@ def client(flask_app):
 
 
 @pytest.fixture
-def init_db():
+def init_db(flask_app):
     """Fixture to initialize the database"""
-
-    db.create_all()
-    yield db
-    db.session.close()
-    db.drop_all()
+    with flask_app.app_context():
+        db.create_all()
+        yield db
+        db.session.close()
+        db.drop_all()
 
 
 @pytest.fixture(scope='session')

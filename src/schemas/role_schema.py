@@ -12,3 +12,4 @@ class RoleSchema(BaseSchema):
     name = fields.String(
         required=True,
         validate=[validate.Length(min=3, max=100), no_space_validation])
+    is_default = fields.Boolean(required=False, data_key='isDefault')

@@ -6,17 +6,19 @@ from flask_restplus import Api
 
 # local import
 from config import app_config
-from src import api_blueprint
+from src import rbac_blueprint
 from src.models.configs.database import (database, migrate)
 from src.utils.application_error import ApplicationError
 from src.views.role import ROLE_NS
+from src.views.service import SERVICE_NS
 
 # initialize RestPlus with the API blueprint
-api = Api(api_blueprint,
+api = Api(rbac_blueprint,
           doc='/doc/',
           description="Documentation for the RBAC service")
 
 api.add_namespace(ROLE_NS)
+api.add_namespace(SERVICE_NS)
 
 
 def register_blueprints(application):
@@ -27,7 +29,7 @@ def register_blueprints(application):
         None
     """
 
-    application.register_blueprint(api_blueprint)
+    application.register_blueprint(rbac_blueprint)
 
 
 def create_app(env):
@@ -68,7 +70,7 @@ def create_app(env):
     return app
 
 
-@api_blueprint.errorhandler(ApplicationError)
+@rbac_blueprint.errorhandler(ApplicationError)
 def handle_exceptions(err):
     """Custom Application Error handler."""
 
