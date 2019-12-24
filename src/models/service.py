@@ -10,7 +10,7 @@ class Service(BaseModel):
     __tablename__ = 'services'
 
     name = db.Column(db.String(80), nullable=False)
-    active = db.Column(db.Boolean, default=False)
+    is_active = db.Column(db.Boolean, default=False)
     permissions = db.relationship('Permission', backref='service', lazy=True)
 
     def __repr__(self):

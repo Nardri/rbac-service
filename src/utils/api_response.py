@@ -18,7 +18,7 @@ def response(response=None, message=None, status_code=200, object_name=None):
     if status_code is 201 and object_name is not None:
         data['message'] = SUCCESS_MESSAGES['CREATED'].format(object_name)
 
-    if response:
+    if response or response == []:
         data['data'] = response
 
     return data, status_code

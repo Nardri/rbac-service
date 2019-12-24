@@ -5,17 +5,16 @@ from flask import request
 
 # Local imports
 from src.models import Role
-from src.schemas.role_schema import RoleSchema
+from src.schemas import RoleSchema
 from src.utils.api_response import response
 from src.utils.constants import ERROR_MESSAGES, SUCCESS_MESSAGES
 from src.utils.validations import validate_id
 from src.utils.raise_errors import raises
-from src.dto.role_dto import RoleDto
+from src.dto import RoleDto
 from src.views.base.base_resource import BaseResource
 
 ROLE_NS = RoleDto.role_ns
 ROLE_DTO = RoleDto.role_dto
-ROLE_MODEL = RoleDto.role_model
 ROLE_RESPONSE = RoleDto.role_response
 
 
@@ -74,7 +73,7 @@ class RoleResource(BaseResource):
     @ROLE_NS.marshal_with(ROLE_RESPONSE)
     @validate_id
     def get(self, role_id):
-        """Get a roles"""
+        """Get a role"""
 
         role = self.get_object(role_id)
         serialized_roles = self.schema.dump(role)

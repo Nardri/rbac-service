@@ -16,7 +16,7 @@ class ServiceFactory(BaseFactory):
     """Service factory"""
 
     name = factory.Sequence(lambda o: f'{faker.word().upper()}_SERVICE')
-    active = factory.Iterator([False, True])
+    is_active = factory.Iterator([False, True])
 
     class Meta:
         """Service Meta class"""

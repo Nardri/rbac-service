@@ -26,10 +26,11 @@ class TestRoleModel:
         assert len(serialized_roles) == 10
         assert serialized_roles[0].get('name') == roles[0].name
 
-    def test_update_role_succeeds(self, init_db):
+    def test__update_role_succeeds(self, init_db):
         """Test Update role method"""
 
-        role = RoleWithPermissionFactory()
+        role = RoleWithPermissionFactory.create(name='before_update',
+                                                permissions='None')
         updated_role = role.update_(name='updated')
 
         assert updated_role.name == 'updated'

@@ -10,6 +10,7 @@ class Role(BaseModel):
     __tablename__ = 'roles'
 
     name = db.Column(db.String(80), nullable=False)
+    is_default = db.Column(db.Boolean, default=False)
     permissions = db.relationship('Permission', backref='role', lazy=True)
 
     def __repr__(self):

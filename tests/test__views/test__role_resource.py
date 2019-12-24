@@ -30,7 +30,7 @@ class TestRoleEndpoints:
             'roles')
         assert new_roles[0].name == data[0]['name']
 
-    def test__get_a_role_succeeds(self, init_db, client, disable_events):
+    def test__get_a_role_succeeds(self, init_db, client):
         """Test get a single role"""
 
         with DisableUniqueIdListener(Role, 'before_insert'):

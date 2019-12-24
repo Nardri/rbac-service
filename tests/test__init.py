@@ -3,7 +3,7 @@
 import json
 
 
-def test_flask_application(client):
+def test__flask_application(client):
     """Should pass if the application starts successfully.
     Args:
         client (func): Flask test client
