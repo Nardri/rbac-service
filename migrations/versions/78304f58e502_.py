@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 175c2e6a95dc
+Revision ID: 78304f58e502
 Revises: 
-Create Date: 2019-12-21 21:14:26.918339
+Create Date: 2019-12-24 22:48:51.215762
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '175c2e6a95dc'
+revision = '78304f58e502'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,6 +23,7 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.Column('name', sa.String(length=80), nullable=False),
+    sa.Column('is_default', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('id')
     )
@@ -31,7 +32,7 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.Column('name', sa.String(length=80), nullable=False),
-    sa.Column('active', sa.Boolean(), nullable=True),
+    sa.Column('is_active', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('id')
     )
@@ -39,8 +40,7 @@ def upgrade():
     sa.Column('id', sa.String(length=36), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.Column('type', sa.Enum('All', 'READ', 'WRITE', 'EDIT', 'DELETE', 'NONE', name='permissiontype'), nullable=True),
-    sa.Column('active', sa.Boolean(), nullable=True),
+    sa.Column('type', sa.Enum('FULL_ACCESS', 'READ', 'WRITE', 'EDIT', 'DELETE', 'NONE', name='permissiontype'), nullable=True),
     sa.Column('service_id', sa.String(length=36), nullable=False),
     sa.Column('role_id', sa.String(length=36), nullable=False),
     sa.ForeignKeyConstraint(['role_id'], ['roles.id'], ondelete='CASCADE'),

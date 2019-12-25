@@ -33,9 +33,9 @@ class RoleWithPermissionFactory(RoleFactory):
             return
 
         if extracted:
-            PermissionFactory(role=self)
+            PermissionFactory(role=self, type=extracted)
 
         else:
             number_of_units = random.randint(1, 10)
             for n in range(number_of_units):
-                PermissionFactory(role=self, type=extracted)
+                PermissionFactory(role=self)

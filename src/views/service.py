@@ -76,7 +76,7 @@ class ServiceListResource(BaseResource):
 
         # serialize and validate the request
         service_details = self.schema.load(request_json)
-        service_details['name'] = service_details['name'].strip().upper()
+        service_details['name'] = service_details['name'].strip()
 
         service = self.model.query_(name=service_details['name']).first()
         if service:

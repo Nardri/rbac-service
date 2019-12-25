@@ -1,6 +1,4 @@
 """Views."""
 
-from .role import RoleResource
-from .role import RoleListResource
-from .service import ServiceListResource
-from .service import ServiceResource
+from .role import RoleResource, RoleListResource, RolePermissionResource
+from .service import ServiceListResource, ServiceResource

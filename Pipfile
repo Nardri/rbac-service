@@ -23,6 +23,7 @@ pytest-cov = "*"
 pytest-flask = "*"
 factory-boy = "*"
 faker = "*"
+marshmallow-enum = "*"
 
 [requires]
 python_version = "3.7"

@@ -144,7 +144,7 @@ class TestServiceEndpoints:
         """Test creating a new service"""
         new_service = ServiceFactory()
 
-        data = { "name": new_service.name }
+        data = { "name": new_service.name.split('_')[0] }
         url = api.url_for(ServiceListResource)
         response_object = client.post(url,
                                       headers=headers,
