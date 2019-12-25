@@ -9,8 +9,7 @@ from app import database as db
 class PermissionFactory(BaseFactory):
     """Permissions factory"""
 
-    type = factory.Iterator([PermissionType.All, PermissionType.NONE])
-    active = factory.Iterator([False, True])
+    type = factory.Iterator(PermissionType.get_enum_members())
     service_id = factory.RelatedFactory('src.factories.ServiceFactory')
     service = factory.SubFactory('src.factories.ServiceFactory')
     role = factory.SubFactory('src.factories.RoleFactory')

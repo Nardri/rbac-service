@@ -1,5 +1,5 @@
 """Test model for roles model"""
-
+from src.models.permission import PermissionType
 from src.models.role import Role
 from src.factories import RoleWithPermissionFactory
 from src.schemas.role_schema import RoleSchema
@@ -29,8 +29,8 @@ class TestRoleModel:
     def test__update_role_succeeds(self, init_db):
         """Test Update role method"""
 
-        role = RoleWithPermissionFactory.create(name='before_update',
-                                                permissions='None')
+        role = RoleWithPermissionFactory.create(
+            name='before_update', permissions=PermissionType.FULL_ACCESS)
         updated_role = role.update_(name='updated')
 
         assert updated_role.name == 'updated'

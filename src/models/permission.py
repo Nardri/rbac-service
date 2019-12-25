@@ -9,12 +9,27 @@ class PermissionType(enum.Enum):
     """
     Permission Enum
     """
-    All = 0
-    READ = 1
-    WRITE = 2
-    EDIT = 3
-    DELETE = 4
-    NONE = 5
+    FULL_ACCESS = 'all'
+    READ = 'read'
+    WRITE = 'write'
+    EDIT = 'edit'
+    DELETE = 'delete'
+    NONE = 'none'
+
+    @classmethod
+    def get_enum_member_names(cls):
+        """Get enum member names"""
+        return [name for name, _ in cls.__members__.items()]
+
+    @classmethod
+    def get_enum_member_values(cls):
+        """Get enum members"""
+        return [member.value for _, member in cls.__members__.items()]
+
+    @classmethod
+    def get_enum_members(cls):
+        """Get enum members"""
+        return [member for _, member in cls.__members__.items()]
 
 
 class Permission(BaseModel):
@@ -24,7 +39,6 @@ class Permission(BaseModel):
     __tablename__ = 'permissions'
 
     type = db.Column(db.Enum(PermissionType), default=PermissionType.NONE)
-    active = db.Column(db.Boolean, default=False)
     service_id = db.Column(db.String(36),
                            db.ForeignKey('services.id', ondelete="CASCADE"),
                            nullable=False)
