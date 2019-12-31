@@ -21,7 +21,7 @@ class Config(object):
     SERVER_NAME = getenv('SERVER_NAME', '127.0.0.1:5000')
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = getenv('DATABASE_URI', defaultDB)
+    SQLALCHEMY_DATABASE_URI = getenv('DATABASE_URI')
 
     RESTPLUS_VALIDATE = True
 
