@@ -24,6 +24,7 @@ pytest-flask = "*"
 factory-boy = "*"
 faker = "*"
 marshmallow-enum = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
