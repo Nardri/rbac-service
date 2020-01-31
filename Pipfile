@@ -25,6 +25,7 @@ factory-boy = "*"
 faker = "*"
 marshmallow-enum = "*"
 gunicorn = "*"
+supervisor = "*"
 
 [requires]
 python_version = "3.7"

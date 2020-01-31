@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 
 env_path = Path('.') / '.env'
 load_dotenv(dotenv_path=env_path, verbose=True)
-defaultDB = 'postgresql://postgres:123456@localhost:5432/nadri-rbac-service'
 
 
 class Config(object):
@@ -18,7 +17,6 @@ class Config(object):
 
     TESTING = False
     DEBUG = False
-    SERVER_NAME = getenv('SERVER_NAME', '127.0.0.1:5000')
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = getenv('DATABASE_URI')
@@ -51,6 +49,7 @@ class Testing(Config):
 
     TESTING = True
     SQLALCHEMY_DATABASE_URI = getenv('TEST_DATABASE_URI')
+    SERVER_NAME = getenv('SERVER_NAME', '0.0.0.0:5000')
 
     environ['JWT_PRIVATE_KEY'] = (
         '-----BEGIN RSA PRIVATE KEY-----\n'

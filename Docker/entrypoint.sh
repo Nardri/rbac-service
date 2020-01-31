@@ -2,19 +2,20 @@
 
 set -e
 
-API_startup() {
-    # Run database migrations
+prod_startup() {
 
-    dockerize -wait tcp://rbac_database:5432 -timeout 1m
-#    dockerize -wait tcp://account_database:5432 -timeout 1m
+    printf " \n"
+    # Run database migrations
+    echo "<<<<<<<<<<<<<<<<<<<< Waiting for postgres... >>>>>>>>>>>>>>>>>>>>>>>>"
+    while ! nc -z rbac_database 5432; do
+        sleep 2
+    done
+    echo "<<<<<<<<<<<<<<<<<<<< PostgreSQL started >>>>>>>>>>>>>>>>>>>>>>>>"
     flask db upgrade
 
-    # Start server
-    echo -e "\n \n"
-    gunicorn --access-logfile '-' \
-        --workers 2 --timeout 3600 \
-        manage:app --bind 0.0.0.0:5000 --reload \
-        --access-logformat "%(h)s %(u)s %(t)s '%(r)s' %(s)s '%(f)s' '%(a)s'"
+    printf " \n"
+    echo "<<<<<<<<<<<<<<<<<<<< Start Supervisor >>>>>>>>>>>>>>>>>>>>>>>>"
+    supervisord -c /usr/local/etc/supervisord.conf
 }
 
-API_startup
+prod_startup
